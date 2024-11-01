@@ -6,6 +6,8 @@ import javax.inject.Inject
 
 class CryptoRepository @Inject constructor(
     private val cryptoApi: CryptoApi,
-){
-    suspend fun getCryptoApiModels(): List<CryptoApiModel> = cryptoApi.getCryptoApiModels()
+) {
+    suspend fun getCryptoApiModels(): List<CryptoApiModel> {
+        return cryptoApi.getCryptoApiModels()
+    }
 }

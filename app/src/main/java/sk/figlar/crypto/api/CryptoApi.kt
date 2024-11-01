@@ -4,7 +4,7 @@ import retrofit2.http.GET
 
 interface CryptoApi {
 
-    @GET("api/v3/ticker/24h")
+    @GET("api/v3/ticker/24hr")
     suspend fun getCryptoApiModels(): List<CryptoApiModel>
 
 }
