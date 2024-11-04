@@ -1,4 +1,5 @@
-package sk.figlar.crypto
+package sk.figlar.crypto.ui.theme
+
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
