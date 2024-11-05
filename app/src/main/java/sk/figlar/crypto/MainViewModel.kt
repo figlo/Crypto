@@ -1,9 +1,10 @@
 package sk.figlar.crypto
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -18,13 +19,9 @@ class MainViewModel @Inject constructor(
     private val _cryptos: MutableStateFlow<List<CryptoApiModel>> = MutableStateFlow(emptyList())
     val cryptos get() = _cryptos.asStateFlow()
 
-    init {
-        fetchCryptos()
-    }
-
-    private fun fetchCryptos() {
+    suspend fun fetchCryptos() {
         viewModelScope.launch {
-            while (true) {
+            try {
                 val fetchedCryptos = cryptoRepository.getCryptoApiModels()
 
                 _cryptos.value = fetchedCryptos
@@ -32,8 +29,14 @@ class MainViewModel @Inject constructor(
                     .filter { it.lastPrice >= 0.003 }                // filter out very cheap cryptos
                     .sortedByDescending { it.lastPrice }             // sort fetched cryptos higher prices first
 
-                delay(1000)
+            } catch (e: Exception) {
+                if (e is CancellationException) throw e
+                Log.e(TAG, "Error fetching cryptos: $e")
             }
         }
+    }
+
+    companion object {
+        const val TAG = "MainViewModel"
     }
 }

@@ -18,16 +18,22 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import sk.figlar.crypto.ui.theme.AppTheme
 import sk.figlar.crypto.utils.formatPerc
 import sk.figlar.crypto.utils.formatPrice
@@ -59,15 +65,27 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
     val viewModel: MainViewModel = viewModel()
+    val lifecycle = LocalLifecycleOwner.current
     val cryptos by viewModel.cryptos.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            while(true) {
+                viewModel.fetchCryptos()
+                delay(4000)
+            }
+        }
+    }
 
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier
+            .background(MaterialTheme.colorScheme.secondaryContainer)
             .padding(start = 4.dp, top = 64.dp, end = 4.dp)
     ) {
         Text(
             text = "Symbol",
+            color = MaterialTheme.colorScheme.onSecondaryContainer,
             modifier = Modifier
                 .weight(2f)
                 .wrapContentSize()
@@ -77,17 +95,29 @@ fun MainScreen(modifier: Modifier = Modifier) {
         )
         Text(
             text = "Avg price / 24h (EUR)",
-            modifier = Modifier.weight(3f),
+            color = MaterialTheme.colorScheme.onSecondaryContainer,
+            modifier = Modifier
+                .weight(3f)
+                .wrapContentSize()
+                .align(Alignment.CenterVertically),
             textAlign = TextAlign.Center,
         )
         Text(
             text = "Last price (EUR)",
-            modifier = Modifier.weight(3f),
+            color = MaterialTheme.colorScheme.onSecondaryContainer,
+            modifier = Modifier
+                .weight(3f)
+                .wrapContentSize()
+                .align(Alignment.CenterVertically),
             textAlign = TextAlign.Center,
         )
         Text(
             text = "Change\n(%)",
-            modifier = Modifier.weight(2f),
+            color = MaterialTheme.colorScheme.onSecondaryContainer,
+            modifier = Modifier
+                .weight(2f)
+                .wrapContentSize()
+                .align(Alignment.CenterVertically),
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
         )
@@ -113,6 +143,9 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 else                         -> android.graphics.Color.rgb(255, 255, 255)
             }
 
+            // set font color to black even in dark mode
+            val fontColor = Color.Black
+
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier
@@ -123,22 +156,26 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 Text(
                     text = crypto.symbol.dropLast(3),
                     modifier = Modifier.weight(2f),
+                    color = fontColor,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Left,
                 )
                 Text(
                     text = formatPrice(crypto.weightedAvgPrice),
                     modifier = Modifier.weight(3f),
+                    color = fontColor,
                     textAlign = TextAlign.Right,
                 )
                 Text(
                     text = formatPrice(crypto.lastPrice),
                     modifier = Modifier.weight(3f),
+                    color = fontColor,
                     textAlign = TextAlign.Right,
                 )
                 Text(
                     text = formatPerc(priceChangePerc),
                     modifier = Modifier.weight(2f),
+                    color = fontColor,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Right,
                 )
