@@ -26,6 +26,7 @@ class MainViewModel @Inject constructor(
 
                 _cryptos.value = fetchedCryptos
                     .filter { it.symbol.takeLast(3) == "EUR" }    // filter EUR prices only
+                    .filter { it.symbol != "EURAEUR" }               // remove this item, not crypto
                     .filter { it.lastPrice >= 0.003 }                // filter out very cheap cryptos
                     .sortedByDescending { it.lastPrice }             // sort fetched cryptos higher prices first
 

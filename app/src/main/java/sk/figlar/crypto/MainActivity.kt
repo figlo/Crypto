@@ -150,7 +150,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier
                     .fillParentMaxWidth()
-                    .background(androidx.compose.ui.graphics.Color(backgroundColor))
+                    .background(Color(backgroundColor))
                     .padding(4.dp)
             ) {
                 Text(
