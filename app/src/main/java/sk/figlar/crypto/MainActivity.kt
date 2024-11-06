@@ -84,7 +84,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
             .padding(start = 4.dp, top = 64.dp, end = 4.dp)
     ) {
         Text(
-            text = "Symbol",
+            text = stringResource(R.string.symbol),
             color = MaterialTheme.colorScheme.onSecondaryContainer,
             modifier = Modifier
                 .weight(2f)
@@ -94,7 +94,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
             textAlign = TextAlign.Center,
         )
         Text(
-            text = "Avg price / 24h (EUR)",
+            text = stringResource(R.string.avg_price_24h_eur),
             color = MaterialTheme.colorScheme.onSecondaryContainer,
             modifier = Modifier
                 .weight(3f)
@@ -103,7 +103,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
             textAlign = TextAlign.Center,
         )
         Text(
-            text = "Last price (EUR)",
+            text = stringResource(R.string.last_price_eur),
             color = MaterialTheme.colorScheme.onSecondaryContainer,
             modifier = Modifier
                 .weight(3f)
@@ -112,7 +112,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
             textAlign = TextAlign.Center,
         )
         Text(
-            text = "Change\n(%)",
+            text = stringResource(R.string.change),
             color = MaterialTheme.colorScheme.onSecondaryContainer,
             modifier = Modifier
                 .weight(2f)

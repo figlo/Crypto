@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Crypto</string>
     <string name="toolbar_title">Crypto live prices</string>
+    <string name="symbol">Symbol</string>
+    <string name="avg_price_24h_eur">Avg price / 24h (EUR)</string>
+    <string name="last_price_eur">Last price (EUR)</string>
+    <string name="change">Change\n(%)</string>
 </resources>
