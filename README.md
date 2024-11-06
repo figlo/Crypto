@@ -3,8 +3,8 @@ Live prices of cryptocurrencies.
 Update every couple of seconds.
 
 ## Screenshots
-![Screenshot_1](https://github.com/user-attachments/assets/8cdf32e2-247f-4691-842b-f993cbfefa4c)
-![Screenshot_2](https://github.com/user-attachments/assets/5c62a908-3b09-4cdd-b892-b8123adc0c40)
+![Screenshot_11](https://github.com/user-attachments/assets/f29286eb-0697-47da-961a-d127a1bebca8)
+![Screenshot_21](https://github.com/user-attachments/assets/8eb04c56-d0b7-4e5b-9819-f567e85c9f6e)
 
 ## Technologies Used
 - Kotlin
