@@ -18,11 +18,6 @@ object ApiModule {
     @Provides
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl("https://data-api.binance.vision/")
-//        .addConverterFactory(
-//            MoshiConverterFactory.create(
-//            Moshi.Builder()
-//                .add(KotlinJsonAdapterFactory())
-//                .build()))
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
 
